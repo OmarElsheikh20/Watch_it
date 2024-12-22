@@ -52,7 +52,7 @@
                <children>
                   <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../../Watch_It_Final/src/main/resources/img/icons8-movie-50.png" />
+                        <Image url="@../../../img/icons8-movie-50.png" />
                      </image>
                   </ImageView>
                   <Label prefHeight="50.0" prefWidth="174.0" styleClass="mouse-moved" text="Movies" textFill="WHITE">

@@ -83,7 +83,7 @@
    <left>
       <VBox prefHeight="812.0" prefWidth="295.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox prefHeight="231.0" prefWidth="295.0" spacing="5.0">
+            <VBox prefHeight="208.0" prefWidth="295.0" spacing="5.0">
                <children>
                   <Label prefHeight="59.0" prefWidth="168.0" text="Browse " textFill="WHITE">
                      <font>
@@ -120,24 +120,7 @@
                               <Image url="@../../../img/icons8-search-50.png" />
                            </image>
                         </ImageView>
-                        <Label prefHeight="59.0" prefWidth="168.0" text="Search" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                           <padding>
-                              <Insets left="15.0" />
-                           </padding>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox fx:id="btnCategories" alignment="CENTER" onMouseClicked="#Categories_Clicked" prefHeight="50.0" prefWidth="320.0" styleClass="mouse-moved" stylesheets="@../../../style.css">
-                     <children>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../img/icons8-category-50.png" />
-                           </image>
-                        </ImageView>
-                        <Label prefHeight="59.0" prefWidth="168.0" text="Categories" textFill="WHITE">
+                        <Label prefHeight="57.0" prefWidth="168.0" text="Search" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
@@ -152,7 +135,7 @@
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
             </VBox>
-            <Separator prefWidth="200.0" />
+            <Separator prefHeight="5.0" prefWidth="295.0" />
             <VBox prefHeight="231.0" prefWidth="295.0" spacing="5.0">
                <children>
                   <Label prefHeight="59.0" prefWidth="168.0" text="Your Movies" textFill="WHITE">

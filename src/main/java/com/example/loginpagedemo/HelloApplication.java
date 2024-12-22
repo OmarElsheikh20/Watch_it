@@ -19,7 +19,7 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Login.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Admin.fxml")));
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
