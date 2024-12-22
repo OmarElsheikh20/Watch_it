@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="511.0" prefWidth="748.0" styleClass="black-background" stylesheets="@../../../style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.loginpagedemo.AddMovieController">
+   <children>
+      <HBox prefHeight="80.0" prefWidth="249.0">
+         <children>
+            <ImageView fitHeight="45.0" fitWidth="216.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../img/logo.png" />
+               </image>
+               <HBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </HBox.margin>
+            </ImageView>
+            <Label text="Label" />
+         </children>
+      </HBox>
+      <TextField fx:id="Title" layoutX="137.0" layoutY="80.0" prefHeight="26.0" prefWidth="173.0" />
+      <Label layoutX="26.0" layoutY="81.0" prefHeight="18.0" prefWidth="74.0" text="Title" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="Genre" layoutX="137.0" layoutY="121.0" prefHeight="26.0" prefWidth="174.0" />
+      <Label layoutX="26.0" layoutY="122.0" prefHeight="18.0" prefWidth="74.0" text="Genre" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="26.0" layoutY="322.0" prefHeight="26.0" prefWidth="114.0" text="Release date" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="Country" layoutX="137.0" layoutY="163.0" prefHeight="26.0" prefWidth="174.0" />
+      <Label layoutX="26.0" layoutY="164.0" prefHeight="18.0" prefWidth="74.0" text="Country" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="412.0" layoutY="14.0" prefHeight="40.0" prefWidth="156.0" text="Add Movie" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="28.0" />
+         </font>
+      </Label>
+      <TextField fx:id="RunningTime" layoutX="140.0" layoutY="284.0" prefHeight="26.0" prefWidth="174.0" />
+      <Label layoutX="26.0" layoutY="284.0" prefHeight="26.0" prefWidth="114.0" text="Running Time" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="Budget" layoutX="137.0" layoutY="203.0" prefHeight="26.0" prefWidth="174.0" />
+      <Label layoutX="26.0" layoutY="204.0" prefHeight="18.0" prefWidth="74.0" text="Budget" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="Language" layoutX="137.0" layoutY="242.0" prefHeight="26.0" prefWidth="174.0" />
+      <Label layoutX="26.0" layoutY="243.0" prefHeight="18.0" prefWidth="74.0" text="Language" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="DFname" layoutX="492.0" layoutY="80.0" prefHeight="26.0" prefWidth="173.0" />
+      <Label layoutX="353.0" layoutY="80.0" prefHeight="26.0" prefWidth="132.0" text="Director Fname" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="DLname" layoutX="492.0" layoutY="121.0" prefHeight="26.0" prefWidth="173.0" />
+      <Label layoutX="353.0" layoutY="121.0" prefHeight="26.0" prefWidth="132.0" text="Director Lname" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="353.0" layoutY="203.0" prefHeight="26.0" prefWidth="132.0" text="Director DOB" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="353.0" layoutY="242.0" prefHeight="26.0" prefWidth="132.0" text="Director Gender" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="DGender" layoutX="492.0" layoutY="242.0" prefHeight="26.0" prefWidth="174.0" />
+      <TextField fx:id="DNation" layoutX="492.0" layoutY="163.0" prefHeight="26.0" prefWidth="173.0" />
+      <Label layoutX="353.0" layoutY="163.0" prefHeight="26.0" prefWidth="132.0" text="Director Nation" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Button fx:id="Savebtn" layoutX="299.0" layoutY="461.0" mnemonicParsing="false" onAction="#btn_Save_Clicked" prefHeight="26.0" prefWidth="150.0" stylesheets="@../../../style.css" text="Save" />
+      <DatePicker fx:id="ReleaseDate" layoutX="139.0" layoutY="322.0" />
+      <DatePicker fx:id="DDOB" layoutX="491.0" layoutY="204.0" />
+      <Button fx:id="AddActor" layoutX="258.0" layoutY="380.0" mnemonicParsing="false" onAction="#btn_AddActor_Clicked" prefHeight="54.0" prefWidth="226.0" text="Add actor" />
+      <ImageView fx:id="PosterView" fitHeight="192.0" fitWidth="138.0" layoutX="546.0" layoutY="284.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="btn_Poster" layoutX="383.0" layoutY="322.0" mnemonicParsing="false" onAction="#btn_Poster_Clicked" prefHeight="26.0" prefWidth="132.0" text="Add Poster" />
+      <TextField fx:id="PosterPath" layoutX="375.0" layoutY="367.0" visible="false" />
+   </children>
+</AnchorPane>

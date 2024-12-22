@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.Rating?>
+
+<AnchorPane prefHeight="224.0" prefWidth="430.0" styleClass="black-background" stylesheets="@../../../style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.loginpagedemo.RatingController">
+   <children>
+      <Rating fx:id="ctrRating" layoutX="127.0" layoutY="80.0" prefHeight="32.0" prefWidth="968.0" />
+      <Button layoutX="54.0" layoutY="158.0" mnemonicParsing="false" onAction="#btnRate_Clicked" prefHeight="32.0" prefWidth="146.0" stylesheets="@../../../style.css" text="Rate" textFill="WHITE">
+         <styleClass>
+            <String fx:value="Button-Orange" />
+            <String fx:value="my-button" />
+         </styleClass>
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="120.0" fitWidth="146.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../img/logo.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="Cancel" layoutX="230.0" layoutY="158.0" mnemonicParsing="false" onAction="#btnWatchWithoutRating_Clicked" prefHeight="37.0" prefWidth="146.0" style="-fx-background-color: white;" styleClass="my-button" stylesheets="@../../../style.css" text="Watch Without Rating" />
+   </children>
+</AnchorPane>

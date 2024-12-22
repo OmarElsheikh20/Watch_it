@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="374.0" prefWidth="585.0" styleClass="black-background" stylesheets="@../../../style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.loginpagedemo.AddMovieController">
+   <children>
+      <Label layoutX="207.0" layoutY="14.0" prefHeight="46.0" prefWidth="172.0" text="Add Actor" textFill="#fcfcfc">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+      <TextField fx:id="AFname" layoutX="275.0" layoutY="93.0" prefHeight="26.0" prefWidth="173.0" />
+      <Label layoutX="136.0" layoutY="93.0" prefHeight="26.0" prefWidth="132.0" text="Actor Fname" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="ALname" layoutX="275.0" layoutY="134.0" prefHeight="26.0" prefWidth="173.0" />
+      <Label layoutX="136.0" layoutY="134.0" prefHeight="26.0" prefWidth="132.0" text="Actor Lname" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="136.0" layoutY="216.0" prefHeight="26.0" prefWidth="132.0" text="Actor DOB" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="136.0" layoutY="255.0" prefHeight="26.0" prefWidth="132.0" text="Actor Gender" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="AGender" layoutX="275.0" layoutY="255.0" prefHeight="26.0" prefWidth="174.0" />
+      <TextField fx:id="ANation" layoutX="275.0" layoutY="176.0" prefHeight="26.0" prefWidth="173.0" />
+      <Label layoutX="136.0" layoutY="176.0" prefHeight="26.0" prefWidth="132.0" text="Actor Nation" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="ADOB" layoutX="274.0" layoutY="217.0" />
+      <Button fx:id="SaveActor" layoutX="243.0" layoutY="307.0" mnemonicParsing="false" onAction="#btn_SaveActor_Clicked" prefHeight="26.0" prefWidth="97.0" text="Save" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="657.0" prefWidth="748.0" style="-fx-background-color: #28252e;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.loginpagedemo.MovieController">
+   <children>
+      <ImageView fx:id="imgPoster" fitHeight="296.0" fitWidth="214.0" layoutX="524.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../img/interstellar.jpg" />
+         </image>
+      </ImageView>
+      <HBox layoutX="-8.0" prefHeight="50.0" prefWidth="756.0" style="-fx-background-color: #201B17;" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label fx:id="lblFormTitle" alignment="CENTER" prefHeight="50.0" prefWidth="1099.0" style="-fx-font-family: Droid Arabic Kufi;" text="Movie Name " textFill="WHITE">
+               <font>
+                  <Font name="Berlin Sans FB Bold" size="24.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="20.0" right="30.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+         <padding>
+            <Insets left="30.0" />
+         </padding>
+      </HBox>
+      <Button fx:id="btnWatch" layoutX="524.0" layoutY="382.0" mnemonicParsing="false" onAction="#btnWatch_Clicked" prefHeight="38.0" prefWidth="200.0" stylesheets="@../../../style.css" text="Watch">
+         <font>
+            <Font name="Segoe UI Bold" size="18.0" />
+         </font>
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+      </Button>
+      <ImageView fitHeight="21.0" fitWidth="23.0" layoutX="582.0" layoutY="391.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../img/play-video.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="524.0" layoutY="438.0" mnemonicParsing="false" onAction="#btnWatchLater_Clicked" prefHeight="38.0" prefWidth="200.0" stylesheets="@../../../style.css" text="Add to Watch Later">
+         <font>
+            <Font name="Segoe UI Bold" size="15.0" />
+         </font>
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+      </Button>
+      <ImageView fitHeight="21.0" fitWidth="23.0" layoutX="539.0" layoutY="447.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../img/Clock.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="111.0" fitWidth="104.0" layoutX="409.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../img/rating.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblRating" layoutX="448.0" layoutY="116.0" text="5.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <VBox layoutX="-2.0" layoutY="50.0" prefHeight="244.0" prefWidth="371.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="138.0" prefWidth="310.0">
+               <children>
+                  <Label prefHeight="22.0" prefWidth="53.0" style="-fx-font-family: Droid Arabic Kufi;" text="Title: " textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblTitle" prefHeight="22.0" prefWidth="258.0" style="-fx-font-family: Droid Arabic Kufi;" text="??" textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB Bold" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="30.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="250.0">
+               <children>
+                  <Label prefHeight="22.0" prefWidth="111.0" style="-fx-font-family: Droid Arabic Kufi;" text="Release Date:" textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblRealeseDate" prefHeight="22.0" prefWidth="206.0" style="-fx-font-family: Droid Arabic Kufi;" text="??" textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB Bold" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="30.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="250.0">
+               <children>
+                  <Label prefHeight="22.0" prefWidth="86.0" style="-fx-font-family: Droid Arabic Kufi;" text="Duration:" textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblDuration" prefHeight="22.0" prefWidth="224.0" style="-fx-font-family: Droid Arabic Kufi;" text="??" textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB Bold" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="30.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="250.0">
+               <children>
+                  <Label prefHeight="22.0" prefWidth="69.0" style="-fx-font-family: Droid Arabic Kufi;" text="Genre:" textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblGenre" prefHeight="22.0" prefWidth="250.0" style="-fx-font-family: Droid Arabic Kufi;" text="??" textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB Bold" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="30.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="250.0">
+               <children>
+                  <Label prefHeight="22.0" prefWidth="90.0" style="-fx-font-family: Droid Arabic Kufi;" text="Language:" textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblLanguage" prefHeight="22.0" prefWidth="221.0" style="-fx-font-family: Droid Arabic Kufi;" text="??" textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB Bold" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="30.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="250.0">
+               <children>
+                  <Label prefHeight="22.0" prefWidth="74.0" style="-fx-font-family: Droid Arabic Kufi;" text="Budgut:" textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblBudgut" prefHeight="22.0" prefWidth="237.0" style="-fx-font-family: Droid Arabic Kufi;" text="??" textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB Bold" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="30.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="250.0">
+               <children>
+                  <Label prefHeight="22.0" prefWidth="74.0" style="-fx-font-family: Droid Arabic Kufi;" text="Country:" textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblCountry" prefHeight="22.0" prefWidth="235.0" style="-fx-font-family: Droid Arabic Kufi;" text="??" textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB Bold" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="30.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="250.0">
+               <children>
+                  <Label prefHeight="22.0" prefWidth="67.0" style="-fx-font-family: Droid Arabic Kufi;" text="Views:" textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblViews" prefHeight="22.0" prefWidth="251.0" style="-fx-font-family: Droid Arabic Kufi;" text="??" textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB Bold" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="30.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="250.0">
+               <children>
+                  <Label prefHeight="22.0" prefWidth="75.0" style="-fx-font-family: Droid Arabic Kufi;" text="Director:" textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Hyperlink fx:id="lblDirectorName" text="??" underline="true">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Hyperlink>
+               </children>
+               <VBox.margin>
+                  <Insets left="30.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </VBox>
+      <Separator layoutX="23.0" layoutY="430.0" prefHeight="23.0" prefWidth="486.0" />
+      <ScrollPane layoutX="23.0" layoutY="472.0" prefHeight="172.0" prefWidth="486.0">
+         <content>
+            <HBox fx:id="CardLayout" prefHeight="156.0" prefWidth="554.0" spacing="20.0" style="-fx-background-color: #28252e;" />
+         </content>
+      </ScrollPane>
+      <Label layoutX="29.0" layoutY="451.0" prefHeight="22.0" prefWidth="75.0" style="-fx-font-family: Droid Arabic Kufi;" text="Cast" textFill="WHITE">
+         <font>
+            <Font name="Berlin Sans FB Bold" size="15.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

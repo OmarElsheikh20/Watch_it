@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #28252E;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.loginpagedemo.SubsDetailsController">
+   <children>
+      <Label alignment="CENTER" layoutX="2.0" layoutY="28.0" prefHeight="47.0" prefWidth="600.0" text="Your Current Subscription" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="32.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER_RIGHT" layoutX="118.0" layoutY="107.0" prefHeight="30.0" prefWidth="160.0" text="Start Date:" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER_RIGHT" layoutX="118.0" layoutY="137.0" prefHeight="30.0" prefWidth="160.0" text="Plan:" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER_RIGHT" layoutX="118.0" layoutY="167.0" prefHeight="30.0" prefWidth="160.0" text="Price:" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER_RIGHT" layoutX="119.0" layoutY="218.0" prefHeight="30.0" prefWidth="160.0" text="Expiration Date:" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Separator layoutX="18.0" layoutY="208.0" prefHeight="3.0" prefWidth="566.0" />
+      <Label alignment="CENTER_RIGHT" layoutX="119.0" layoutY="248.0" prefHeight="30.0" prefWidth="160.0" text="Allowed Watches:" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER_RIGHT" layoutX="118.0" layoutY="278.0" prefHeight="30.0" prefWidth="160.0" text="Remaining Watches:" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblStartDate" alignment="TOP_LEFT" layoutX="300.0" layoutY="110.0" prefHeight="30.0" prefWidth="160.0" text="??" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblPlan" alignment="TOP_LEFT" layoutX="300.0" layoutY="140.0" prefHeight="30.0" prefWidth="160.0" text="??" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblPrice" alignment="TOP_LEFT" layoutX="300.0" layoutY="170.0" prefHeight="30.0" prefWidth="160.0" text="??" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblEndDate" alignment="TOP_LEFT" layoutX="301.0" layoutY="221.0" prefHeight="30.0" prefWidth="160.0" text="??" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblAllowedWatches" alignment="TOP_LEFT" layoutX="301.0" layoutY="251.0" prefHeight="30.0" prefWidth="160.0" text="??" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblRemaining" alignment="TOP_LEFT" layoutX="300.0" layoutY="281.0" prefHeight="30.0" prefWidth="160.0" text="??" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
