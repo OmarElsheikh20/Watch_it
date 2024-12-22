@@ -72,7 +72,7 @@ public class Subscription implements Serializable {
                 return 50;
             }
             default -> {
-                return -1 ;
+                return 0 ;
             }
         }
     }
