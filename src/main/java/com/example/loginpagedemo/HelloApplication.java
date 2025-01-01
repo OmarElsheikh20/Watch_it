@@ -26,7 +26,6 @@ public class HelloApplication extends Application {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Watch It");
-        stage.getIcons().add(new Image("watchit.jpeg"));
         stage.show();
     }
 
