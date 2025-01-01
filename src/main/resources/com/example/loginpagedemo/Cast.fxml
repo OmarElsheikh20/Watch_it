@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="228.0" prefWidth="385.0" style="-fx-background-color: #28252E;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.loginpagedemo.CastController">
+   <children>
+      <Label fx:id="lblFirst" layoutX="35.0" layoutY="40.0" prefHeight="78.0" prefWidth="202.0" text="First" textFill="WHITE">
+         <font>
+            <Font size="53.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblLast" layoutX="35.0" layoutY="118.0" prefHeight="78.0" prefWidth="202.0" text="Last" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="53.0" />
+         </font>
+      </Label>
+      <TabPane layoutX="244.0" layoutY="34.0" prefHeight="452.0" prefWidth="495.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Details">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="226.0" prefWidth="495.0">
+                     <children>
+                        <Label layoutX="87.0" layoutY="111.0" text="Nationality:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="75.0" layoutY="145.0" text="Date of Birth:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="126.0" layoutY="46.0" text="Name:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="117.0" layoutY="79.0" text="Gender:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblNationality" layoutX="203.0" layoutY="110.0" prefHeight="26.0" prefWidth="196.0" text="??" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblDateOfBirth" layoutX="204.0" layoutY="144.0" prefHeight="26.0" prefWidth="194.0" text="??" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblName" layoutX="201.0" layoutY="45.0" prefHeight="26.0" prefWidth="202.0" text="??" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblGender" layoutX="203.0" layoutY="78.0" prefHeight="26.0" prefWidth="202.0" text="??" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Separator layoutX="140.0" layoutY="200.0" prefWidth="200.0" />
+                        <Label layoutX="33.0" layoutY="223.0" text="Social Media Links:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Hyperlink layoutX="183.0" layoutY="219.0" text="facebook" underline="true">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Hyperlink>
+                        <Hyperlink layoutX="263.0" layoutY="219.0" text="instagram" underline="true">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Hyperlink>
+                        <Hyperlink layoutX="353.0" layoutY="219.0" text="twetter" underline="true">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Hyperlink>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Movies">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ScrollPane layoutX="16.0" prefHeight="326.0" prefWidth="462.0" styleClass="transparent1" stylesheets="@../../../style.css">
+                           <content>
+                              <HBox fx:id="CardLayout" prefHeight="310.0" prefWidth="634.0" spacing="20.0" styleClass="transparent" stylesheets="@../../../style.css">
+                                 <padding>
+                                    <Insets left="20.0" top="20.0" />
+                                 </padding>
+                              </HBox>
+                           </content>
+                        </ScrollPane>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

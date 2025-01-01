@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class Cast extends Person implements Serializable {
 
@@ -22,8 +23,18 @@ public class Cast extends Person implements Serializable {
 
 
 
-    public ArrayList<Movie> getListOfMovies() {
-        return ListOfMovies;
+    public HashSet<Movie> getListOfMovies() {
+        ArrayList<Movie> allMovies = Movie.getAllMovies();
+        HashSet<Movie> movies = new HashSet<>();
+        for (Movie movie : allMovies) {
+            for (Actor actor : movie.getActors()) {
+                if (this.getFullName().equalsIgnoreCase(actor.getFullName())) {
+                    movies.add(movie);
+                    break;
+                }
+            }
+        }
+        return movies;
     }
     public void setListOfMovies(ArrayList<Movie> listOfMovies) {
         ListOfMovies = listOfMovies;

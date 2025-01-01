@@ -65,21 +65,6 @@ public class AddMovieController implements Initializable {
     private TextField Title;
 
     @FXML
-    private DatePicker ADOB;
-
-    @FXML
-    private TextField AFname;
-
-    @FXML
-    private ChoiceBox<Person.enGender> AGender;
-
-    @FXML
-    private TextField ALname;
-
-    @FXML
-    private TextField ANation;
-
-    @FXML
     private ImageView PosterView;
 
 
@@ -102,6 +87,8 @@ public class AddMovieController implements Initializable {
     }
 
 
+    ArrayList<Actor> actors = new ArrayList<>();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -109,58 +96,42 @@ public class AddMovieController implements Initializable {
         if (DGender != null) {
             DGender.getItems().addAll(Person.enGender.Male, Person.enGender.Female);
         }
-        if (AGender != null) {
-            AGender.getItems().addAll(Person.enGender.Male, Person.enGender.Female);
-        }
 
+//        AddActorController addActorController = new AddActorController();
+//        ActionEvent event = new ActionEvent();
+//        try {
+//            actors.add(addActorController.btn_SaveActor_Clicked(event));
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
 
     }
 
-    public static Parent roota;
-
-    static {
-        try {
-            roota = FXMLLoader.load(AdminController.class.getResource("AddActor.fxml"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public static Stage stagea = new Stage();
-    public static Scene scenea = new Scene(roota);
 
     public void btn_AddActor_Clicked(ActionEvent event) throws IOException {
-        stagea.setScene(scenea);
-        stagea.setTitle("Add Actor");
-        stagea.showAndWait();
-    }
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AddActor.fxml"));
+        Parent rootactor = loader.load();
 
-    public ArrayList<Actor> actors = new ArrayList<>();
+        // Get the AddActorController
+        AddActorController addActorController = loader.getController();
 
-    public void btn_SaveActor_Clicked(ActionEvent event) throws IOException {
+        // Create and display the stage
+        Stage stageactor = new Stage();
+        stageactor.setScene(new Scene(rootactor));
+        stageactor.showAndWait(); // Wait for the user to complete the actor addition
 
-        if (AFname.getText().isEmpty() || ALname.getText().isEmpty() || ADOB.getValue() == null || AGender.getValue() == null || ANation.getText().isEmpty()) {
-            MessageBox.showError("Error", "Please fill in all the actor details.");
+        // After the stage is closed, retrieve the new actor
+        Actor actor = addActorController.getActor(); // Implement a getter in AddActorController
+        if (actor != null) {
+            actors.add(actor); // Add the actor to the list
+            MessageBox.showConfirmation("Success", "Actor added successfully!");
+        } else {
+            MessageBox.showError("Error", "No actor was added.");
         }
-
-        String afname = AFname.getText();
-        String alname = ALname.getText();
-        LocalDate adob = ADOB.getValue();
-        Person.enGender agender = AGender.getValue();
-        String anation = ANation.getText();
-
-        Actor actor = new Actor(afname, alname, adob, agender, anation);
-        actors.add(actor);
-
-        AFname.clear();
-        ALname.clear();
-        ADOB.setValue(null);
-        AGender.setValue(null);
-        ANation.clear();
-
-        stagea.close();
-        MessageBox.showConfirmation("Success", "Actor added successfully!");
     }
+
+
+
 
     private File selectedFile;
 
@@ -168,7 +139,7 @@ public class AddMovieController implements Initializable {
         FileChooser fileChooser = new FileChooser();
 
 
-        File defaultDir = new File("F:/Project/Watch_It_Final/src/main/resources/img");
+        File defaultDir = new File("C://Users/Ahmed Alian/IdeaProjects/Watch_It/src/main/resources/img");
 
         if (defaultDir.exists() && defaultDir.isDirectory()) {
             fileChooser.setInitialDirectory(defaultDir);
@@ -217,6 +188,8 @@ public class AddMovieController implements Initializable {
 
 
         Director director = new Director(dfname, dlname, ddob, dgender, dnation);
+
+
 
         Movie movie = new Movie(title, genre, runningTime, budget, country, language, releaseDate, revenue, views, director, actors, selectedFile.toURI().toString());
 

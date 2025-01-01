@@ -136,7 +136,6 @@ public class AdminController implements Initializable {
         stage.setScene(scene);
         stage.setTitle("Subscriptions");
         stage.show();
-
     }
 
 
@@ -177,11 +176,6 @@ public class AdminController implements Initializable {
             Mrm.setText("Most Revenue Month: " + MrmMonths.toString());
         }
 
-        if (Id != null) {
-            Id.setCellValueFactory(new PropertyValueFactory<>("Id"));
-        } else {
-            System.err.println("Id TableColumn is null!");
-        }
 
         if (Title != null) {
             Title.setCellValueFactory(new PropertyValueFactory<>("Title"));
@@ -252,11 +246,6 @@ public class AdminController implements Initializable {
 
         ObservableList<User> list2 = FXCollections.observableArrayList(users);
 
-        if (Uid != null) {
-            Uid.setCellValueFactory(new PropertyValueFactory<>("ID"));
-        } else {
-            System.err.println("Id TableColumn is null!");
-        }
 
         if (Uusername != null) {
             Uusername.setCellValueFactory(new PropertyValueFactory<>("Username"));
@@ -370,18 +359,18 @@ public class AdminController implements Initializable {
         int basic=0,standard=0,premium=0;
         for (User user : users)
         {
-            switch (user.getCurrentSubscription().getPlan()) {
-                case Basic:
-                    basic++;
-                    break;
-                case Standard:
-                    standard++;
-                    break;
-                case Premium:
-                    premium++;
-                    break;
-                default:
-                    break;
+            if (user.getCurrentSubscription() != null) {
+                switch (user.getCurrentSubscription().getPlan()) {
+                    case Basic:
+                        basic++;
+                        break;
+                    case Standard:
+                        standard++;
+                        break;
+                    case Premium:
+                        premium++;
+                        break;
+                }
             }
         }
 
@@ -409,31 +398,40 @@ public class AdminController implements Initializable {
 
     }
 
-    private Subscription.enPlan PlanofMonth  (ArrayList<Subscription> SubsHistory,int Month){
+    private Subscription.enPlan PlanofMonth  (User user,int Month){
 
-        for(Subscription s:SubsHistory){
-            if(s.getStartDate().getMonth().getValue()==Month){
-                return s.getPlan();
+        if (user.getCurrentSubscription() != null) {
+            if(!user.getSubscriptionHistory().isEmpty()) {
+                for (Subscription s : user.getSubscriptionHistory()) {
+
+                    if (s.getStartDate().getMonth().getValue() == Month) {
+                        return s.getPlan();
+                    }
+                }
+            }
+            else if(user.getCurrentSubscription().getStartDate().getMonth().getValue()==Month)
+            {
+                return user.getCurrentSubscription().getPlan();
             }
         }
+
         return Subscription.enPlan.Non;
+
     }
 
 
     public ArrayList<String> MostRevenueMonth() throws IOException {
 
-        ArrayList<User> users = User.LoadUsersFromFile();
-
+        ArrayList<User> users = User.getAllUsers();
         int [] EachMonthRevenue= new int[13];
 
         EachMonthRevenue[0]=0;
 
         for(int i=1;i<=12;i++) {
 
-
             for (User user : users) {
 
-                EachMonthRevenue[i]+= Subscription.getPrices(PlanofMonth(user.getSubscriptionHistory(),i));
+                EachMonthRevenue[i]+= Subscription.getPrices(PlanofMonth(user,i));
 
             }
 

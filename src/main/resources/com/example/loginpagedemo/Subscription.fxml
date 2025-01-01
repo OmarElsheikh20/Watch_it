@@ -53,7 +53,7 @@
                   <Font name="System Bold" size="27.0" />
                </font>
             </Label>
-            <Label fx:id="lblStandardPrice" layoutX="320.0" layoutY="87.0" prefHeight="39.0" prefWidth="114.0" text="100 EGP" textAlignment="CENTER" textFill="#fffefe">
+            <Label fx:id="lblStandardPrice" alignment="CENTER" layoutX="283.0" layoutY="87.0" prefHeight="39.0" prefWidth="189.0" text="100 EGP" textAlignment="CENTER" textFill="#fffefe">
                <font>
                   <Font name="System Bold" size="27.0" />
                </font>
@@ -72,7 +72,7 @@
                   <Font name="System Bold" size="27.0" />
                </font>
             </Label>
-            <Label fx:id="lblPremiumPrice" layoutX="320.0" layoutY="87.0" prefHeight="39.0" prefWidth="114.0" text="200 EGP" textAlignment="CENTER" textFill="#fffefe">
+            <Label fx:id="lblPremiumPrice" alignment="CENTER" layoutX="231.0" layoutY="87.0" prefHeight="39.0" prefWidth="282.0" text="200 EGP" textAlignment="CENTER" textFill="#fffefe">
                <font>
                   <Font name="System Bold" size="27.0" />
                </font>
@@ -91,7 +91,7 @@
                   <Font name="System Bold" size="27.0" />
                </font>
             </Label>
-            <Label fx:id="lblBasicPrice" layoutX="335.0" layoutY="87.0" prefHeight="39.0" prefWidth="95.0" text="50 EGP" textAlignment="CENTER" textFill="#fffefe">
+            <Label fx:id="lblBasicPrice" alignment="CENTER" layoutX="242.0" layoutY="87.0" prefHeight="39.0" prefWidth="290.0" text="50 EGP" textAlignment="CENTER" textFill="#fffefe">
                <font>
                   <Font name="System Bold" size="27.0" />
                </font>

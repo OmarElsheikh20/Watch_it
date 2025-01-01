@@ -1,21 +1,26 @@
 package watchIt;
 
 import java.io.Serializable;
+import java.rmi.server.UID;
 import java.time.LocalDate;
+import java.util.UUID;
 
 public class Subscription implements Serializable {
     public enum enPlan {Basic, Standard, Premium, Non}
 
+    private UUID subscriptionId;
     private enPlan Plan;
     private float Price;
-
     private LocalDate StartDate;
     private int AllowedWatches;
+
+    public UUID getSubscriptionId() {
+        return subscriptionId;
+    }
 
     public LocalDate getStartDate() {
         return StartDate;
     }
-
     public int getAllowedWatches() {
         return AllowedWatches;
     }
@@ -33,17 +38,11 @@ public class Subscription implements Serializable {
     }
 
     public Subscription(enPlan plan, LocalDate startDate) {
+        this.subscriptionId = UUID.randomUUID();
         Plan = plan;
         StartDate = startDate;
         initializePlanDetails();
     }
-
-    public Subscription() {
-        this.Plan = enPlan.Non;
-        this.StartDate = LocalDate.now();
-        initializePlanDetails();
-    }
-
 
     private void setPrice() {
         switch (Plan) {
@@ -76,7 +75,6 @@ public class Subscription implements Serializable {
             }
         }
     }
-
     private void initializePlanDetails() {
         switch (Plan) {
             case Premium -> {
@@ -96,5 +94,19 @@ public class Subscription implements Serializable {
                 this.AllowedWatches = 0;
             }
         }
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        Subscription that = (Subscription) obj;
+        return subscriptionId.equals(that.subscriptionId);
+    }
+
+    @Override
+    public int hashCode() {
+        return subscriptionId.hashCode();
     }
 }

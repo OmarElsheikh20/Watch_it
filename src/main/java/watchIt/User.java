@@ -4,6 +4,8 @@ import java.io.*;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 public class User implements Serializable {
 
@@ -17,7 +19,7 @@ public class User implements Serializable {
     private String LastName;
     private String Email;
 
-    private ArrayList<Movie> WatchedMovies;
+    private HashSet<Movie> WatchedMovies;
     public ArrayList<Movie> WatchLaterMovies;
     private ArrayList<UserWatchRecord> userWatchRecord;
 
@@ -28,12 +30,11 @@ public class User implements Serializable {
     public Subscription getCurrentSubscription() {
         return currentSubscription;
     }
-    public ArrayList<Subscription> getSubscriptionHistory() {return subscriptionHistory;}
-    public Subscription.enPlan getGuiSubscription() {return currentSubscription.getPlan();}
 
     public int getID() {
         return ID;
     }
+
     public void setID(int ID) {
         this.ID = ID;
     }
@@ -41,6 +42,7 @@ public class User implements Serializable {
     public String getUsername() {
         return Username;
     }
+
     public void setUsername(String username) {
         Username = username;
     }
@@ -48,6 +50,7 @@ public class User implements Serializable {
     public String getPassword() {
         return Password;
     }
+
     public void setPassword(String password) {
         Password = password;
     }
@@ -55,6 +58,7 @@ public class User implements Serializable {
     public String getFirstName() {
         return FirstName;
     }
+
     public void setFirstName(String firstName) {
         FirstName = firstName;
     }
@@ -62,6 +66,7 @@ public class User implements Serializable {
     public String getLastName() {
         return LastName;
     }
+
     public void setLastName(String lastName) {
         LastName = lastName;
     }
@@ -73,6 +78,7 @@ public class User implements Serializable {
     public String getEmail() {
         return Email;
     }
+
     public void setEmail(String email) {
         Email = email;
     }
@@ -80,16 +86,19 @@ public class User implements Serializable {
     public Subscription getSubscription() {
         return currentSubscription;
     }
+
     public void setSubscription(Subscription subscription) {
         this.currentSubscription = subscription;
         this.limitMovies = currentSubscription.getAllowedWatches();
     }
+    public Subscription.enPlan getGuiSubscription() {return currentSubscription.getPlan();}
 
     public int getLimitMovies() {
         return limitMovies;
     }
 
-    private static int counter =1;
+    private static int counter = 1;
+
     public User(String username, String email, String lastName, String firstName, String password) {
         Username = username;
         this.ID = counter++;
@@ -98,20 +107,21 @@ public class User implements Serializable {
         FirstName = firstName;
         Password = password;
 
-        WatchedMovies = new ArrayList<>();
+        WatchedMovies = new HashSet<>();
         WatchLaterMovies = new ArrayList<>();
         userWatchRecord = new ArrayList<>();
-        currentSubscription = new Subscription();
         subscriptionHistory = new ArrayList<>();
-        this.limitMovies = currentSubscription.getAllowedWatches();
+
     }
+
     public static ArrayList<User> getAllUsers() {
         if (Users == null) {
             Users = LoadUsersFromFile();
         }
         return Users;
     }
-    public static ArrayList<User> LoadUsersFromFile() {
+
+    private static ArrayList<User> LoadUsersFromFile() {
 
         ArrayList<User> users = new ArrayList<>();
         File file = new File(FILENAME);
@@ -129,6 +139,7 @@ public class User implements Serializable {
 
         return users;
     }
+
     public static void saveUsersDataToFile() {
         File file = new File(FILENAME);
 
@@ -148,6 +159,7 @@ public class User implements Serializable {
         }
         return null;
     }
+
     public static User Find(String Username, String Password) throws IOException {
         ArrayList<User> users = getAllUsers();
 
@@ -157,6 +169,7 @@ public class User implements Serializable {
         }
         return null;
     }
+
     public static User Find(int ID) throws IOException {
         ArrayList<User> users = getAllUsers();
 
@@ -166,16 +179,19 @@ public class User implements Serializable {
         }
         return null;
     }
+
     public static boolean isUserExist(String Username) throws IOException {
         User user = Find(Username);
         return (user != null);
     }
+
     public static boolean isUserExist(int ID) throws IOException {
         User user = Find(ID);
         return (user != null);
     }
+
     public static boolean isUserExist(String Username, String Password) throws IOException {
-        User user = Find(Username,Password);
+        User user = Find(Username, Password);
         return (user != null);
     }
 
@@ -205,6 +221,7 @@ public class User implements Serializable {
         saveUsersDataToFile();
         return true;
     }
+
     public static boolean Delete(String username) throws IOException {
 
         ArrayList<User> users = getAllUsers();
@@ -219,35 +236,49 @@ public class User implements Serializable {
         return true;
     }
 
-    public void DecrementLimitByOne(){
-        if (limitMovies >= 0) {
-            this.limitMovies--;
+    public void DecrementLimitByOne(Movie movie) {
+        if (!isMovieWatchedInCurrentSubscription(movie)) {
+            if (limitMovies >= 0) {
+                this.limitMovies--;
+            } else {
+                createNewSups(null);
+            }
+            saveUsersDataToFile();
         }
-        else {
-            createNewSups(null);
-        }
-        saveUsersDataToFile();
     }
+
     public Boolean hasValidSups() {
         if (currentSubscription == null) return false;
 
-        long days =  Math.abs(ChronoUnit.DAYS.between(currentSubscription.getStartDate(), LocalDate.now()));
+        long days = Math.abs(ChronoUnit.DAYS.between(currentSubscription.getStartDate(), LocalDate.now()));
         return limitMovies > 0 && days <= 30;
     }
+
     public void createNewSups(Subscription subscription) {
-        subscriptionHistory.add(currentSubscription);
+        if (currentSubscription != null) {
+            subscriptionHistory.add(currentSubscription);
+        }
         currentSubscription = subscription;
         if (subscription != null)
             this.limitMovies = subscription.getAllowedWatches();
         else
             this.limitMovies = 0;
         saveUsersDataToFile();
+
     }
 
     public void WatchMovie(UserWatchRecord record) {
+
+        for (UserWatchRecord rec : userWatchRecord) {
+            if (rec.getMovie().getTitle().equalsIgnoreCase(record.getMovie().getTitle())) {
+                userWatchRecord.remove(rec);
+                break;
+            }
+        }
         userWatchRecord.add(record);
         saveUsersDataToFile();
     }
+
     public boolean AddToWatchLater(Movie movie) {
         if (!isExistInWatchLater(movie)) {
             this.WatchLaterMovies.add(movie);
@@ -256,6 +287,7 @@ public class User implements Serializable {
         }
         return false;
     }
+
     private boolean isExistInWatchLater(Movie movie) {
         ArrayList<Movie> watchLater = this.WatchLaterMovies;
         for (Movie m : watchLater) {
@@ -264,14 +296,60 @@ public class User implements Serializable {
         }
         return false;
     }
-    public boolean isExistInHistory(Movie movie) {
-        ArrayList<Movie> historyMovies = this.WatchedMovies;
-        for (Movie m : historyMovies) {
-            if (m.getTitle().equalsIgnoreCase(movie.getTitle()))
-                return true;
+
+    private boolean isMovieWatchedInCurrentSubscription(Movie movie) {
+        ArrayList<UserWatchRecord> history = userWatchRecord;
+        for (UserWatchRecord record : history) {
+            if (record.getMovie().getTitle().equalsIgnoreCase(movie.getTitle())) {
+                if (record.getSubscription().equals(this.currentSubscription))
+                    return true;
+            }
         }
         return false;
     }
+
+    public HashSet<Movie> getHistory() {
+        HashSet<Movie> set = new HashSet<>();
+        for (UserWatchRecord rec : userWatchRecord) {
+            set.add(rec.getMovie());
+        }
+        return set;
+    }
+
+    public ArrayList<Movie> getWatchLater() {
+        return WatchLaterMovies;
+    }
+
+    public HashSet<Movie> getRecommended() {
+        List<Movie> allMovies = Movie.getAllMovies();
+        HashSet<Movie> history = getHistory();
+        HashSet<Movie> recommended = new HashSet<>();
+
+        HashSet<String> preferredGenres = new HashSet<>();
+        HashSet<Actor> preferredActors = new HashSet<>();
+
+        for (Movie watchedMovie : history) {
+            preferredGenres.add(watchedMovie.getGenre());
+            preferredActors.addAll(watchedMovie.getActors());
+        }
+
+        for (Movie movie : allMovies) {
+
+            // Skip movies already in the user's history
+            if (history.contains(movie)) {
+                continue;
+            }
+
+            boolean matchesGenre = preferredGenres.contains(movie.getGenre());
+            boolean matchesActor = movie.getActors().stream().anyMatch(preferredActors::contains);
+
+            if (matchesGenre || matchesActor) {
+                recommended.add(movie);
+            }
+        }
+        return recommended;
+    }
+
 
     public static void clearFile() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILENAME))) {
@@ -281,5 +359,9 @@ public class User implements Serializable {
         } catch (IOException e) {
             System.err.println("Error while clearing movies file: " + e.getMessage());
         }
+    }
+
+    public ArrayList<Subscription> getSubscriptionHistory() {
+        return subscriptionHistory;
     }
 }

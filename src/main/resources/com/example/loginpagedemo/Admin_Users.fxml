@@ -127,7 +127,6 @@
    <center>
       <TableView fx:id="UsersView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn fx:id="Uid" prefWidth="150.0" text="Id" />
           <TableColumn fx:id="Uusername" minWidth="0.0" prefWidth="150.0" text="Username" />
             <TableColumn fx:id="Upassword" prefWidth="150.0" text="Password" />
             <TableColumn fx:id="Ufirstname" prefWidth="150.0" text="FirstName" />

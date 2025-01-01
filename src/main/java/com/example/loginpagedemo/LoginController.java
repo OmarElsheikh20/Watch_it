@@ -56,7 +56,7 @@ public class LoginController {
         }
 
         if (user != null) {
-            MessageBox.showConfirmation( "Success","Login Successful!");
+            MessageBox.showInfo( "Success","Login Successful!");
         }
         else {
             MessageBox.showError( "Failed","Wrong username or password !");

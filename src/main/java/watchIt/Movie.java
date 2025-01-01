@@ -1,10 +1,16 @@
 package watchIt;
 
+import com.example.loginpagedemo.FilterController;
+import com.example.loginpagedemo.Filters;
+import com.example.loginpagedemo.Filters;
+
 import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Movie implements Serializable {
 
@@ -30,7 +36,6 @@ public class Movie implements Serializable {
 
     private float OldRatings;
     private int noofwatched;
-
 
 
     public ArrayList<Actor> getActors() {
@@ -177,7 +182,7 @@ public class Movie implements Serializable {
         Revenue = revenue;
         Views = views;
     }
-    public Movie(String title, String genre, int runningTime, float budget, String country, String language, LocalDate releaseDate ,String posterSrc, Director director , ArrayList<Actor> actors ) {
+        public Movie(String title, String genre, int runningTime, float budget, String country, String language, LocalDate releaseDate ,String posterSrc, Director director , ArrayList<Actor> actors ) {
         Id = count++;
         Title = title;
         Genre = genre;
@@ -235,18 +240,11 @@ public class Movie implements Serializable {
         }
     }
 
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        Movie movie = (Movie) obj;
-        return Id == movie.Id;
-    }
-
     public static Movie Find(String movieTitle) {
         ArrayList<Movie> Movies = getAllMovies();
 
         for (Movie movie : Movies) {
-            if (movie.getTitle().equals(movieTitle)) {
+            if (movie.getTitle().equalsIgnoreCase(movieTitle)) {
                 return movie;
             }
         }
@@ -322,7 +320,6 @@ public class Movie implements Serializable {
         AllMovies.addAll(moviesToAdd);
         SaveMoviesToFile();
     }
-
     public static Boolean DeleteMovie(Movie movie) {
         ArrayList<Movie> Movies = getAllMovies();
         if (IsMovieExist(movie.getTitle())) {
@@ -416,10 +413,10 @@ public class Movie implements Serializable {
         SaveMoviesToFile();
     }
 
-    public static ArrayList<Movie> Filter(String word) { // word : movie name or actor name or genre
+    public static HashSet<Movie> Filter(String word) { // word : movie name or actor name or genre
 
         ArrayList<Movie> AllMovies = LoadMovieFromFile();
-        ArrayList<Movie> FilteredMovies = new ArrayList<>();
+        HashSet<Movie> FilteredMovies = new HashSet<>();
         for (Movie movie : AllMovies)
         {
             if (movie.getTitle().toLowerCase().contains(word.toLowerCase()) || movie.getGenre().toLowerCase().contains(word.toLowerCase()))
@@ -483,4 +480,82 @@ public class Movie implements Serializable {
         }
     }
 
+    public static List<Movie> FilterWithCriteria(Filters filters) {
+        List<Movie> AllMovies = new ArrayList<>(getAllMovies());
+        HashSet<Movie> filteredMovies = new HashSet<>();
+
+        for (Movie movie : AllMovies) {
+            boolean matches = true;
+
+
+            if (filters.getDuration() != null) { // Apply Duration Filter
+                switch (filters.getDuration()) {
+                    case LESS_THAN_HOUR -> {
+                        if (!(movie.getRunningTime() < 60)) {
+                            matches = false;
+                        }
+                    }
+                    case LESS_THAN_TWO_HOURS -> {
+                        if (!(movie.getRunningTime() >= 60 && movie.getRunningTime() < 120)) {
+                            matches = false;
+                        }
+                    }
+                    case MORE_THAN_TWO_HOURS -> {
+                        if (!(movie.getRunningTime() >= 120)) {
+                            matches = false;
+                        }
+                    }
+                }
+            }
+
+
+            if (filters.getRating() != null) { // Apply Rating Filter
+                switch (filters.getRating()) {
+                    case ABOVE_3 -> {
+                        if (!(movie.getRating() > 3.0f)) {
+                            matches = false;
+                        }
+                    }
+                    case ABOVE_4 -> {
+                        if (!(movie.getRating() > 4.0f)) {
+                            matches = false;
+                        }
+                    }
+                }
+            }
+
+            if (filters.getLanguage() != null) { // Apply Language Filter
+                switch (filters.getLanguage()) {
+                    case ENGLISH -> {
+                        if (!movie.getLanguage().equalsIgnoreCase("English")) {
+                            matches = false;
+                        }
+                    }
+                    case ARABIC -> {
+                        if (!movie.getLanguage().equalsIgnoreCase("Arabic")) {  // If language is not Arabic, exclude it
+                            matches = false;
+                        }
+                    }
+                    case OTHERS -> {
+                        if (movie.getLanguage().equalsIgnoreCase("English") || movie.getLanguage().equalsIgnoreCase("Arabic")) {
+                            matches = false;
+                        }
+                    }
+                }
+            }
+            if (matches) {
+                filteredMovies.add(movie);
+            }
+        }
+
+        return new ArrayList<>(filteredMovies);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Movie movie = (Movie) obj;
+        return Id == movie.Id;
+    }
 }

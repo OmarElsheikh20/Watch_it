@@ -28,12 +28,12 @@ public class MainController implements Initializable {
 
     private ArrayList<Movie> recentMovies;
     private ArrayList<Movie> MostViewsMovies;
-    private ArrayList<Movie> searchedMovies;
+    private List<Movie> searchedMovies;
 
     @FXML
     private HBox CardLayout,CardLayout1;
     @FXML
-    private HBox btnHome, btnSearch, btnCategories, btnHistory, btnRecommended, btnWatchLater, btnSubsDetails;
+    private HBox btnHome, btnSearch, btnHistory, btnRecommended, btnWatchLater, btnSubsDetails;
 
     @FXML
     private GridPane srchCardLayout;
@@ -56,7 +56,7 @@ public class MainController implements Initializable {
         MostViewsMovies = Movie.getMostViewedMovie(24);
 
         lblUserName.setText(Global.CurrentUser.getFullName());
-        buttons = List.of(btnHome, btnSearch, btnCategories, btnHistory, btnWatchLater, btnRecommended,btnSubsDetails);
+        buttons = List.of(btnHome, btnSearch, btnHistory, btnWatchLater, btnRecommended,btnSubsDetails);
 
 //        pan_Home.setVisible(true);
 //        pan_Search.setVisible(false);
@@ -116,15 +116,6 @@ public class MainController implements Initializable {
         }
     }
 
-    @FXML
-    void Categories_Clicked(MouseEvent event) {
-
-    }
-
-    @FXML
-    void History_Clicked(MouseEvent event) {
-
-    }
 
     @FXML
     void Home_Clicked(MouseEvent event) {
@@ -147,20 +138,21 @@ public class MainController implements Initializable {
             System.err.println("Failed operation, Can't get recent movies or trending movies" + ex.getMessage());
         }
     }
+
+    private Filters filters;
+    @FXML
+    void btnSearch_Clicked(MouseEvent event) throws IOException {
+        Display_Search();
+    }
+    @FXML
+    void tfSearch_KeyReleasd(KeyEvent event) throws IOException {
+        Display_Search();
+    }
     @FXML
     void Search_Clicked(MouseEvent event) throws IOException {
         pan_Home.setVisible(false);
         pan_Search.setVisible(true);
 
-        btnSearch.getStyleClass().addAll("selected", "mouse-moved");
-        buttons.stream()
-                .filter(b -> b != btnSearch)
-                .forEach(b -> {
-                    b.getStyleClass().remove("selected");
-                    if (!b.getStyleClass().contains("mouse-moved")) {
-                        b.getStyleClass().add("mouse-moved");
-                    }
-                });
         try {
             searchedMovies = new ArrayList<>(Movie.getAllMovies());
             Display_Search();
@@ -170,14 +162,174 @@ public class MainController implements Initializable {
         }
 
     }
+    private void Display_Search() throws IOException {
+        String word = FuckingSearch.getText().trim();
+
+        if (word.isEmpty())
+            searchedMovies = Movie.getAllMovies();
+        else
+            searchedMovies = Movie.Filter(word).stream().toList();
+
+        srchCardLayout.getChildren().clear();
+        int column = 0;
+        int row = 0;
+
+// Set row and column constraints to remove extra space dynamically
+        srchCardLayout.getRowConstraints().clear();
+        srchCardLayout.getColumnConstraints().clear();
+
+// Define the height of each row based on the movie card height
+        int movieCardHeight = 280;
+
+// Assuming a width of 5 columns
+        int totalColumns = 5;
+        double spacing = 10.0; // Margin between cards
+
+// Loop through the movies and add them to the grid pane
+        for (Movie value : searchedMovies) {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("Card.fxml"));
+            VBox cardBox = fxmlLoader.load();
+
+            MovieCardController cardController = fxmlLoader.getController();
+            cardController.setData(value);
+
+            srchCardLayout.add(cardBox, column, row);
+
+            column++;
+
+            if (column == totalColumns) {
+                column = 0;
+                row++;
+            }
+
+            GridPane.setMargin(cardBox, new Insets(spacing));
+        }
+
+// Set constraints dynamically for proper layout
+        for (int i = 0; i < totalColumns; i++) {
+            ColumnConstraints columnConstraints = new ColumnConstraints();
+            columnConstraints.setPercentWidth(100.0 / totalColumns);
+            srchCardLayout.getColumnConstraints().add(columnConstraints);
+        }
+
+        for (int i = 0; i <= row; i++) {
+            RowConstraints rowConstraints = new RowConstraints();
+            rowConstraints.setMinHeight(movieCardHeight + spacing);
+            rowConstraints.setVgrow(Priority.NEVER); // Avoid stretching vertically
+            srchCardLayout.getRowConstraints().add(rowConstraints);
+        }
+
+
+    }
+    @FXML
+    void filter_Clicked(ActionEvent event) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Filter.fxml"));
+        Parent root = loader.load();
+
+        FilterController filterController = loader.getController();
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Filter");
+        stage.showAndWait();
+
+        // Get selected filters
+        filters = filterController.selectedFilters();
+
+        if (filters != null) {
+            searchedMovies = Movie.FilterWithCriteria(filters);
+            Update();
+        }
+    }
+    private void Update() throws IOException {
+        srchCardLayout.getChildren().clear();
+        int column = 0;
+        int row = 0;
+        for (Movie value : searchedMovies) {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("Card.fxml"));
+            VBox cardBox = fxmlLoader.load();
+
+            MovieCardController cardController = fxmlLoader.getController();
+            cardController.setData(value);
+
+            srchCardLayout.add(cardBox, column, row);
+
+            column++;
+
+            if (column == 5) {
+                column = 0;
+                row++;
+            }
+
+            GridPane.setMargin(cardBox, new Insets(10));
+
+        }
+    }
+
+    @FXML
+    void History_Clicked(MouseEvent event) {
+        try {
+            Stage stage = new Stage();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("UserMovies.fxml"));
+            Parent root = fxmlLoader.load();
+
+            // Get the controller and pass data to it
+            UserMoviesController controller = fxmlLoader.getController();
+            controller.Display_History();
+
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            MessageBox.showError("Error", "Cannot Load \"UserMovies.fxml\" "
+                    + e.getMessage());
+        }
+
+    }
+
     @FXML
     void Recommended_Clicked(MouseEvent event) {
+        try {
+            Stage stage = new Stage();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("UserMovies.fxml"));
+            Parent root = fxmlLoader.load();
 
+            // Get the controller and pass data to it
+            UserMoviesController controller = fxmlLoader.getController();
+            controller.Display_Recommended();
+
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            MessageBox.showError("Error", "Cannot Load \"UserMovies.fxml\" "
+                    + e.getMessage());
+        }
     }
+
     @FXML
     void WatchLater_Clicked(MouseEvent event) {
+        try {
+            Stage stage = new Stage();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("UserMovies.fxml"));
+            Parent root = fxmlLoader.load();
 
+            // Get the controller and pass data to it
+            UserMoviesController controller = fxmlLoader.getController();
+            controller.Display_WatchLater();
+
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            MessageBox.showError("Error", "Cannot Load \"UserMovies.fxml\" "
+                    + e.getMessage());
+        }
     }
+
     @FXML
     void ShowSubsDetails_Clicked(MouseEvent event) {
         if (Global.CurrentUser.hasValidSups()) {
@@ -204,45 +356,21 @@ public class MainController implements Initializable {
         }
     }
 
+
     @FXML
-    void btnSearch_Clicked(MouseEvent event) throws IOException {
-       Display_Search();
-    }
-    @FXML
-    void tfSearch_KeyReleasd(KeyEvent event) throws IOException {
-        Display_Search();
-    }
-    private void Display_Search() throws IOException {
-        String word = FuckingSearch.getText().trim();
-        System.out.println("text changed to: " + word);
+    void Logout_Clicked(MouseEvent event) {
+        try {
+            Stage currentStage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            currentStage.close();
 
-        if (word.isEmpty())
-            searchedMovies = Movie.getAllMovies();
-        else
-            searchedMovies = Movie.Filter(word);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
+            Parent root = loader.load();
 
-        srchCardLayout.getChildren().clear();
-        int column = 0;
-        int row = 0;
-        for (Movie value : searchedMovies) {
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("Card.fxml"));
-            VBox cardBox = fxmlLoader.load();
-
-            MovieCardController cardController = fxmlLoader.getController();
-            cardController.setData(value);
-
-            srchCardLayout.add(cardBox, column, row);
-
-            column++;
-
-            if (column == 5) {
-                column = 0;
-                row++;
-            }
-
-            GridPane.setMargin(cardBox, new Insets(10));
-
+            Stage loginStage = new Stage();
+            loginStage.setScene(new Scene(root));
+            loginStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

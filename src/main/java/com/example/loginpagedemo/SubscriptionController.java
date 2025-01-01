@@ -48,16 +48,6 @@ public class SubscriptionController {
     private AnchorPane paneStandard;
 
     @FXML
-    void btnBasic_Clicked(ActionEvent event) {
-        btnPremium.setStyle("-fx-background-color: white;");
-        btnStandard.setStyle("-fx-background-color: white;");
-        btnBasic.setStyle("-fx-background-color: #dca523;");
-        paneBasic.setVisible(true);
-        paneStandard.setVisible(false);
-        panePremium.setVisible(false);
-    }
-
-    @FXML
     void btnNext_Clicked(ActionEvent event) throws IOException {
 
         if (paneBasic.isVisible()) {
@@ -87,6 +77,17 @@ public class SubscriptionController {
     }
 
     @FXML
+    void btnBasic_Clicked(ActionEvent event) {
+        btnPremium.setStyle("-fx-background-color: white;");
+        btnStandard.setStyle("-fx-background-color: white;");
+        btnBasic.setStyle("-fx-background-color: #dca523;");
+        paneBasic.setVisible(true);
+        paneStandard.setVisible(false);
+        panePremium.setVisible(false);
+
+        lblBasicPrice.setText(Subscription.getPrices(Subscription.enPlan.Basic) + " EGP");
+    }
+    @FXML
     void btnPremium_Clicked(ActionEvent event) {
         btnBasic.setStyle("-fx-background-color: white;");
         btnStandard.setStyle("-fx-background-color: white;");
@@ -94,8 +95,9 @@ public class SubscriptionController {
         paneBasic.setVisible(false);
         paneStandard.setVisible(false);
         panePremium.setVisible(true);
-    }
 
+        lblPremiumPrice.setText(Subscription.getPrices(Subscription.enPlan.Premium) + " EGP");
+    }
     @FXML
     void btnStandard_Clicked(ActionEvent event) {
         btnBasic.setStyle("-fx-background-color: white;");
@@ -104,6 +106,8 @@ public class SubscriptionController {
         paneBasic.setVisible(false);
         paneStandard.setVisible(true);
         panePremium.setVisible(false);
+
+        lblStandardPrice.setText(Subscription.getPrices(Subscription.enPlan.Standard) + " EGP");
     }
 
 }

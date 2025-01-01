@@ -3,6 +3,7 @@ package watchIt;
 import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Director extends Cast implements Serializable {
 
@@ -115,5 +116,18 @@ public class Director extends Cast implements Serializable {
         }
         else
             return false;
+    }
+
+
+    @Override
+    public HashSet<Movie> getListOfMovies() {
+        ArrayList<Movie> allMovies = Movie.getAllMovies();
+        HashSet<Movie> movies = new HashSet<>();
+        for (Movie movie : allMovies) {
+            if (this.getFullName().equalsIgnoreCase(movie.getDirector().getFullName())) {
+                movies.add(movie);
+            }
+        }
+        return movies;
     }
 }

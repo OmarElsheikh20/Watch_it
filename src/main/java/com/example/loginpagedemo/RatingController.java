@@ -62,10 +62,11 @@ public class RatingController {
     private void completeWatching(Integer rate) {
 
         selectedMovie.IncrementViewsByOne();
-        Global.CurrentUser.DecrementLimitByOne();
+        Global.CurrentUser.DecrementLimitByOne(selectedMovie);
 
         // Add the movie to the user's watch history
-        UserWatchRecord record = new UserWatchRecord(Global.CurrentUser.getID(), selectedMovie, LocalDate.now(), rate);
+        UserWatchRecord record = new UserWatchRecord(Global.CurrentUser.getID(), selectedMovie, LocalDate.now(), rate,
+                Global.CurrentUser.getCurrentSubscription());
         Global.CurrentUser.WatchMovie(record);
 
         MessageBox.showInfo("Watching Done", "The movie has been added to your history. " +

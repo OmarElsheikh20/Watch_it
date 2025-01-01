@@ -33,7 +33,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <HBox alignment="CENTER" onMouseClicked="#btn_Movies_Clicked" prefHeight="50.0" prefWidth="289.0" styleClass="selected" stylesheets="@../../../../../../../Watch_It_Final/src/main/resources/style.css">
+            <HBox alignment="CENTER" onMouseClicked="#btn_Movies_Clicked" prefHeight="50.0" prefWidth="289.0" styleClass="selected" stylesheets="@../../../style.css">
                <children>
                   <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -122,7 +122,6 @@
    <center>
       <TableView fx:id="MoviesView" prefHeight="706.0" prefWidth="998.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn fx:id="Id" prefWidth="100.0" text="Id" />
           <TableColumn fx:id="Title" prefWidth="100.0" text="Title" />
             <TableColumn fx:id="Genre" prefWidth="100.0" text="Genre" />
             <TableColumn fx:id="RunningTime" prefWidth="100.0" text="RunningTime" />
@@ -137,7 +136,6 @@
             <ContextMenu fx:id="contextMenu">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#Deletemovie" text="Delete" />
-                  <MenuItem mnemonicParsing="false" text="Edit" />
               </items>
             </ContextMenu>
          </contextMenu>

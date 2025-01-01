@@ -216,7 +216,7 @@
                         <Font name="Berlin Sans FB Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Hyperlink fx:id="lblDirectorName" text="??" underline="true">
+                  <Hyperlink fx:id="lblDirectorName" onAction="#Director_Clicked" text="??" underline="true">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>

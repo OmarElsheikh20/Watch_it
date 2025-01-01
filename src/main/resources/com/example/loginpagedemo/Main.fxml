@@ -3,6 +3,7 @@
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
@@ -83,7 +84,7 @@
    <left>
       <VBox prefHeight="812.0" prefWidth="295.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox prefHeight="208.0" prefWidth="295.0" spacing="5.0">
+            <VBox prefHeight="195.0" prefWidth="295.0" spacing="5.0">
                <children>
                   <Label prefHeight="59.0" prefWidth="168.0" text="Browse " textFill="WHITE">
                      <font>
@@ -120,7 +121,7 @@
                               <Image url="@../../../img/icons8-search-50.png" />
                            </image>
                         </ImageView>
-                        <Label prefHeight="57.0" prefWidth="168.0" text="Search" textFill="WHITE">
+                        <Label prefHeight="59.0" prefWidth="168.0" text="Search" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
@@ -135,8 +136,11 @@
                   <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
             </VBox>
-            <Separator prefHeight="5.0" prefWidth="295.0" />
-            <VBox prefHeight="231.0" prefWidth="295.0" spacing="5.0">
+            <Separator prefWidth="200.0">
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </VBox.margin></Separator>
+            <VBox prefHeight="244.0" prefWidth="295.0" spacing="5.0">
                <children>
                   <Label prefHeight="59.0" prefWidth="168.0" text="Your Movies" textFill="WHITE">
                      <font>
@@ -199,7 +203,12 @@
                   </HBox>
                </children>
             </VBox>
-            <VBox prefHeight="231.0" prefWidth="295.0" spacing="5.0">
+            <Separator prefHeight="0.0" prefWidth="295.0">
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </VBox.margin>
+            </Separator>
+            <VBox prefHeight="128.0" prefWidth="295.0" spacing="5.0">
                <children>
                   <Label prefHeight="59.0" prefWidth="168.0" text="Your Subscription" textFill="WHITE">
                      <font>
@@ -231,11 +240,48 @@
                   </HBox>
                </children>
             </VBox>
+            <Separator prefWidth="200.0">
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </VBox.margin>
+            </Separator>
+            <VBox prefHeight="128.0" prefWidth="295.0" spacing="5.0">
+               <children>
+                  <Label prefHeight="59.0" prefWidth="168.0" text="Your Account" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" onMouseClicked="#Logout_Clicked" prefHeight="50.0" prefWidth="320.0" styleClass="mouse-moved" stylesheets="@../../../style.css">
+                     <children>
+                        <ImageView fitHeight="30.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../img/logout.png" />
+                           </image>
+                        </ImageView>
+                        <Label prefHeight="50.0" prefWidth="202.0" stylesheets="@../../../style.css" text="Logout" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets left="15.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="40.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
          </children>
       </VBox>
    </left>
    <center>
-      <Pane fx:id="pan_Home" prefHeight="727.0" prefWidth="48.0" BorderPane.alignment="CENTER">
+      <Pane fx:id="pan_Home" prefHeight="727.0" prefWidth="48.0" visible="false" BorderPane.alignment="CENTER">
          <children>
             <VBox prefHeight="697.0" prefWidth="1020.0">
                <children>
@@ -279,7 +325,7 @@
       </Pane>
    </center>
    <right>
-      <Pane fx:id="pan_Search" prefHeight="675.0" prefWidth="1234.0" visible="false" BorderPane.alignment="CENTER">
+      <Pane fx:id="pan_Search" prefHeight="675.0" prefWidth="1234.0" BorderPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER" layoutX="214.0" layoutY="7.0" maxHeight="-Infinity" prefHeight="41.0" prefWidth="548.0" spacing="10.0" styleClass="round-layout" stylesheets="@../../../style.css">
                <children>
@@ -302,15 +348,25 @@
                   </ImageView>
                </children>
             </HBox>
-            <ScrollPane layoutY="77.0" prefHeight="496.0" prefWidth="1021.0" style="-fx-background-color: #28252e;" stylesheets="@../../../style.css">
+            <ScrollPane layoutY="77.0" prefHeight="603.0" prefWidth="1021.0" style="-fx-background-color: #28252e;" stylesheets="@../../../style.css">
                <content>
-                  <GridPane fx:id="srchCardLayout" prefHeight="670.0" prefWidth="0.0" style="-fx-background-color: #28252e;">
+                  <GridPane fx:id="srchCardLayout" prefHeight="966.0" prefWidth="1006.0" style="-fx-background-color: #28252e;">
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                   </GridPane>
                </content>
             </ScrollPane>
+            <Button layoutX="857.0" layoutY="15.0" mnemonicParsing="false" onAction="#filter_Clicked" prefHeight="31.0" prefWidth="115.0" styleClass="filter-button" stylesheets="@../../../style.css" text="         Filter">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="18.0" fitWidth="19.0" layoutX="877.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../img/icons8-filter-50.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
    </right>

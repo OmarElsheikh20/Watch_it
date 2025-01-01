@@ -4,6 +4,7 @@ module com.example.loginpagedemo {
     requires org.controlsfx.controls;
     requires java.desktop;
     requires jdk.jshell;
+    requires java.rmi;
     opens com.example.loginpagedemo to javafx.fxml;
     exports com.example.loginpagedemo;
     exports watchIt;
